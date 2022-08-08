@@ -2,17 +2,54 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from "@/views/home/HomeView";
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import Layout from '../../layout/Layout'
 
 const routes = [
-    {
-        path: '/home',
-        name: 'HomeView',
-        component: HomeView,
-    },
+
     {
         path: '/404',
         component: () => import('@/views/common/404.vue'),
         meta: {title:"404" ,requireAuth:false}
+    },
+    {
+        path: '/:pathMatch(.*)',
+        redirect: '404'
+    },
+    {
+        path: '/home',
+        component: Layout,
+        meta: {title:"概要" ,requireAuth:false},
+        children: [
+            {
+                path: '/home',
+                name: '概要',
+                icon: 'Help',
+                component: HomeView,
+            }
+        ]
+    },
+    {
+        path: '/workload',
+        name: '工作负载',
+        component:Layout,
+        icon: 'menu',
+        meta: {title:"工作负载" ,requireAuth:true},
+        children: [
+            {
+                path: '/workload/deployment',
+                name: 'Deployment',
+                icon: 'el-icon-s-data',
+                meta: {title:"Deployment" ,requireAuth:true},
+                component: () => import('@/views/deployment/Deployment'),
+            },
+            {
+                path: '/workload/pod',
+                name: 'Pod',
+                icon: 'el-icon-document-add',
+                meta: {title:"Deployment" ,requireAuth:true},
+                component: () => import('@/views/pod/Pod'),
+            }
+        ]
     },
 ]
 
