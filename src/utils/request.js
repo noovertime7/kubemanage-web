@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // 新建axios对象
 const  httpClient = axios.create({
-    VUE_APP_BASE_API: '/k8s',
+    VUE_APP_BASE_API: '/api',
     timeout: 10000,
     validateStatus(status) {
         return status >= 200 && status < 504
@@ -37,7 +37,7 @@ httpClient.interceptors.request.use(
 // 响应拦截器
 httpClient.interceptors.response.use(
     response => {
-        if (response.status !== 200) {
+        if (response.status !== 200 || response.data.code !== 200 ) {
             return Promise.reject(response.data)
         }else {
             return response.data

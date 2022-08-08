@@ -2,10 +2,9 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from "@/views/home/HomeView";
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import Layout from '../../layout/Layout'
+import Layout from '../layout/Layout'
 
 const routes = [
-
     {
         path: '/404',
         component: () => import('@/views/common/404.vue'),
@@ -14,6 +13,16 @@ const routes = [
     {
         path: '/:pathMatch(.*)',
         redirect: '404'
+    },
+    {
+        path: '/',
+        redirect: '/home' //重定向
+    },
+    {
+        path: '/login',  //url路径
+        component: () => import('@/views/login/Login.vue'),  //视图组件
+        icon: "odometer",  //图标
+        meta: {title: "登录", requireAuth: false},  //meta元信息
     },
     {
         path: '/home',
@@ -53,10 +62,6 @@ const routes = [
     },
 ]
 
-const router = createRouter({
-    history: createWebHashHistory(),
-    routes
-})
 
 // 进度条配置
 NProgress.inc(0.2)
@@ -68,6 +73,10 @@ NProgress.configure({
     trickleSpeed: 200, // 自动递增间隔
     minimum: 0.3, // 更改启动时使用的最小百分比
     parent: 'body', //指定进度条的父容器
+})
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
 })
 
 router.beforeEach((to,from,next) => {
@@ -82,6 +91,31 @@ router.beforeEach((to,from,next) => {
     // 放行
     next()
 })
+const whiteList = ["/login", "/authredirect"];
+//使用钩子函数对路由进行权限跳转
+router.beforeEach((to, from, next) => {
+        console.log(getToken())
+        if (getToken()) {
+            if (to.path === '/login') {
+                next({path: '/home'})
+            } else {
+                next()
+            }
+        } else {
+            console.log("没有token")
+            if (whiteList.indexOf(to.path) !== -1) {
+                next()
+            } else {
+                next('/login')
+            }
+        }
+    }
+)
+
+
+const getToken = () => {
+    return localStorage.getItem('token')
+}
 
 
 router.afterEach(() => {

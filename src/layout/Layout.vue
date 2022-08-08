@@ -79,7 +79,7 @@
         </el-main>
         <el-footer class="footer">
           <el-icon style="width: 2em;top: 3px;font-size: 18px"><place/></el-icon>
-          <a class="footer el-icon-place">2022 adoo devops</a>
+          <a class="footer el-icon-place">devops platform</a>
         </el-footer>
         <el-backtop target=".el-main"></el-backtop>
       </el-container>
@@ -121,7 +121,7 @@ export default {
     logout() {
       localStorage.removeItem("username")
       localStorage.removeItem("token")
-      this.$route.push('/login')
+      this.$router.push('/login')
     },
     changepwd() {
       alert('changepwd')
