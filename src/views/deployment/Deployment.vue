@@ -294,9 +294,10 @@ import httpClient from '../../utils/request';
 import yaml2obj from 'js-yaml';
 import json2yaml from 'json2yaml';
 import {
+  createDeployment, deleteDeployment,
   getdeploymentdetail,
   getdeploymentlist,
-  getNamespecelist,
+  getNamespecelist, restartDeployment, restartdeployment,
   scaledeployment,
   updatedeployment
 } from "@/api/deployment";
@@ -592,7 +593,7 @@ export default {
     restartDeployment(e) {
       this.restartDeploymentData.params.deployment_name = e.row.metadata.name
       this.restartDeploymentData.params.namespace = this.namespaceValue
-      httpClient.put(this.restartDeploymentData.url, this.restartDeploymentData.params)
+      restartdeployment(this.restartDeploymentData.params)
           .then(res => {
             this.$message.success({
               message: res.msg
@@ -609,7 +610,7 @@ export default {
     delDeployment(e) {
       this.delDeploymentData.params.deployment_name = e.row.metadata.name
       this.delDeploymentData.params.namespace = this.namespaceValue
-      httpClient.delete(this.delDeploymentData.url, {data: this.delDeploymentData.params})
+      deleteDeployment(this.delDeploymentData.params)
           .then(res => {
             this.$message.success({
               message: res.msg
@@ -672,7 +673,7 @@ export default {
       this.createDeploymentData.params.label = label
       this.createDeploymentData.params.cpu = cpu
       this.createDeploymentData.params.memory = memory
-      httpClient.post(this.createDeploymentData.url, this.createDeploymentData.params)
+      createDeployment(this.createDeploymentData.params)
           .then(res => {
             this.$message.success({
               message: res.msg
