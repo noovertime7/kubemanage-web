@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
+import router from "@/router";
+
 
 // 新建axios对象
 const  httpClient = axios.create({
@@ -38,6 +41,15 @@ httpClient.interceptors.request.use(
 httpClient.interceptors.response.use(
     response => {
         if (response.status !== 200 || response.data.code !== 200 ) {
+            if (response.data.code === 11002 ) {
+                ElMessage({
+                    message: '登录已过期，请重新登陆',
+                    type: 'warning',
+                })
+                localStorage.removeItem('token')
+                router.push('/login')
+                return
+            }
             return Promise.reject(response.data)
         }else {
             return response.data

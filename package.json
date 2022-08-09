@@ -10,8 +10,11 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
     "axios": "^0.27.2",
+    "codemirror-editor-vue3": "^2.1.7",
     "core-js": "^3.8.3",
     "element-plus": "^2.2.12",
+    "js-yaml": "^4.1.0",
+    "json2yaml": "^1.1.0",
     "moment": "^2.29.4",
     "nprogress": "^0.2.0",
     "vue": "^3.2.13",
