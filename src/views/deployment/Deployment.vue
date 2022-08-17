@@ -290,18 +290,17 @@
 
 <script>
 import common from "../common/Config";
-import httpClient from '../../utils/request';
 import yaml2obj from 'js-yaml';
 import json2yaml from 'json2yaml';
 import {
   createDeployment, deleteDeployment,
   getdeploymentdetail,
   getdeploymentlist,
-  getNamespecelist, restartDeployment, restartdeployment,
+  restartdeployment,
   scaledeployment,
   updatedeployment
 } from "@/api/deployment";
-
+import {getNamespecelist} from "@/api/namespace";
 
 
 
@@ -411,7 +410,6 @@ export default {
       //yaml更新
       yamlDialog: false,
       updateDeploymentData: {
-        url: common.k8sDeploymentUpdate,
         params: {
           namespace: '',
           content: ''
@@ -421,7 +419,6 @@ export default {
       scaleNum: 0,
       scaleDialog: false,
       scaleDeploymentData: {
-        url: common.k8sDeploymentScale,
         params: {
           deployment_name: '',
           namespace: '',
@@ -430,7 +427,6 @@ export default {
       },
       //重启
       restartDeploymentData: {
-        url: common.k8sDeploymentRestart,
         params: {
           deployment_name: '',
           namespace: '',
@@ -438,7 +434,6 @@ export default {
       },
       //删除
       delDeploymentData: {
-        url: common.k8sDeploymentDel,
         params: {
           deployment_name: '',
           namespace: '',

@@ -1,15 +1,6 @@
 import request from "@/utils/request";
 
 
-
-export function getNamespecelist(query) {
-    return request({
-        url: '/api/k8s/namespace/list',
-        method: 'get',
-        params: query
-    })
-}
-
 export function getdeploymentlist(query) {
     return request({
         url: '/api/k8s/deployment/list',
@@ -17,6 +8,16 @@ export function getdeploymentlist(query) {
         params: query
     })
 }
+
+
+export function getDeploymentByNs(query) {
+    return request({
+        url: '/api/k8s/deployment/numnp',
+        method: 'get',
+        params: query
+    })
+}
+
 
 export function getdeploymentdetail(query) {
     return request({

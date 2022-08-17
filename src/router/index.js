@@ -38,6 +38,20 @@ const routes = [
         ]
     },
     {
+        path: '/workflow',
+        component: Layout,
+        icon: "VideoPlay",
+        children: [
+            {
+                path: "/workflow",
+                name: "工作流",
+                icon: "VideoPlay",
+                meta: {title: "工作流", requireAuth: true},
+                component: () => import('@/views/workflow/Workflow.vue')
+            }
+        ]
+    },
+    {
         path: '/workload',
         name: '工作负载',
         component:Layout,
@@ -57,9 +71,106 @@ const routes = [
                 icon: 'el-icon-document-add',
                 meta: {title:"Deployment" ,requireAuth:true},
                 component: () => import('@/views/pod/Pod'),
+            },
+            {
+                path: "/workload/deamonset",
+                name: "DaemonSet",
+                icon: "el-icon-document-add",
+                meta: {title: "DaemonSet", requireAuth: true},
+                component: () => import("@/views/daemonset/DaemonSet.vue")
+            },
+            {
+                path: "/workload/statefulset",
+                name: "StatefulSet",
+                icon: "el-icon-document-add",
+                meta: {title: "StatefulSets", requireAuth: true},
+                component: () => import("@/views/statefulset/StatefulSet.vue")
             }
         ]
     },
+    {
+        path: "/loadbalance",
+        name: "负载均衡",
+        component: Layout,
+        icon: "files",
+        meta: {title: "负载均衡", requireAuth: true},
+        children: [
+            {
+                path: "/loadbalance/service",
+                name: "Service",
+                icon: "el-icon-s-data",
+                meta: {title: "Service", requireAuth: true},
+                component: () => import("@/views/service/Service.vue")
+            },
+            {
+                path: "/loadbalance/ingress",
+                name: "Ingress",
+                icon: "el-icon-document-add",
+                meta: {title: "Ingress", requireAuth: true},
+                component: () => import("@/views/ingress/Ingress.vue")
+            }
+        ]
+    },
+    {
+        path: "/storage",
+        name: "存储与配置",
+        component: Layout,
+        icon: "tickets",
+        meta: {title: "存储与配置", requireAuth: true},
+        children: [
+            {
+                path: "/storage/configmap",
+                name: "Configmap",
+                icon: "el-icon-document-add",
+                meta: {title: "Configmap", requireAuth: true},
+                component: () => import("@/views/configmap/ConfigMap.vue")
+            },
+            {
+                path: "/storage/secret",
+                name: "Secret",
+                icon: "el-icon-document-add",
+                meta: {title: "Secret", requireAuth: true},
+                component: () => import("@/views/secret/Secret.vue")
+            },
+            {
+                path: "/storage/persistentvolumeclaim",
+                name: "PVC",
+                icon: "el-icon-s-data",
+                meta: {title: "PersistentVolumeClaim", requireAuth: true},
+                component: () => import("@/views/persistentvolumeclaim/PersistentVolumeClaim.vue")
+            }
+        ]
+    },
+    {
+        path: "/cluster",
+        name: "集群",
+        component: Layout,
+        icon: "Cpu",
+        meta: {title: "集群", requireAuth: true},
+        children: [
+            {
+                path: "/cluster/node",
+                name: "Node",
+                icon: "el-icon-ship",
+                meta: {title: "Node", requireAuth: true},
+                component: () => import("@/views/node/Node.vue")
+            },
+            {
+                path: "/cluster/namespace",
+                name: "Namespace",
+                icon: "el-icon-ship",
+                meta: {title: "Namespace", requireAuth: true},
+                component: () => import("@/views/namespace/Namespace.vue")
+            },
+            {
+                path: "/cluster/persistentvolume",
+                name: "PersistentVolume",
+                icon: "el-icon-ship",
+                meta: {title: "PersistemtVolume", requireAuth: true},
+                component: () => import("@/views/persistentvolume/PersistentVolume.vue")
+            }
+        ]
+    }
 ]
 
 

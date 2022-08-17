@@ -20,7 +20,7 @@ httpClient.defaults.shoudRetry = true // 是否重试
 httpClient.interceptors.request.use(
     config => {
         // 添加header
-        config.headers["Content-Type"] = 'application/json'
+        config.headers["Content-Type"] = 'application/json;charset=UTF-8'
         config.headers["Accept-Language"] = 'zh-CN'
         config.headers["token"] = localStorage.getItem("token")
         // 处理post请求
