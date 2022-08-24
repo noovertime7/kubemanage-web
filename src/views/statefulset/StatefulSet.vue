@@ -175,7 +175,7 @@ export default {
       statefulSetDetail: {},
       getStatefulSetDetailData: {
         params: {
-          statefulset_name: '',
+          name: '',
           namespace: ''
         }
       },
@@ -190,7 +190,7 @@ export default {
       //删除
       delStatefulSetData: {
         params: {
-          statefulset_name: '',
+          name: '',
           namespace: '',
         }
       }
@@ -267,7 +267,7 @@ export default {
       this.appLoading = false
     },
     getStatefulSetDetail(e) {
-      this.getStatefulSetDetailData.params.statefulset_name = e.row.metadata.name
+      this.getStatefulSetDetailData.params.name = e.row.metadata.name
       this.getStatefulSetDetailData.params.namespace = this.namespaceValue
       GetStateFulSetDetail(this.getStatefulSetDetailData.params)
           .then(res => {
@@ -299,7 +299,7 @@ export default {
       this.yamlDialog = false
     },
     delStatefulSet(e) {
-      this.delStatefulSetData.params.statefulset_name = e.row.metadata.name
+      this.delStatefulSetData.params.name = e.row.metadata.name
       this.delStatefulSetData.params.namespace = this.namespaceValue
       DeleteStateFulSet(this.delStatefulSetData.params)
           .then(res => {
