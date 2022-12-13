@@ -753,7 +753,8 @@ export default {
         "&namespace=" +
         this.namespaceValue;
       //实例化
-      this.socket = new WebSocket(terminalWsUrl);
+      let token=localStorage.getItem("token")
+      this.socket = new WebSocket(terminalWsUrl,[token]);
       //关闭连接时的方法
       this.socketOnClose();
       //建立连接时的方法
